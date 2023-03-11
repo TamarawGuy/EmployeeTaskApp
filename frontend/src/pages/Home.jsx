@@ -34,6 +34,9 @@ export default function Home() {
               key={emp._id}
               employee={emp}
               requestEmployees={requestEmployees}
+              employees={employees}
+              setEmployees={setEmployees}
+              requestTasks={requestTasks}
             />
           ))}
       </div>
@@ -45,6 +48,8 @@ export default function Home() {
               key={task._id}
               task={task}
               requestTasks={requestTasks}
+              tasks={tasks}
+              setTasks={setTasks}
             />
           ))}
       </div>

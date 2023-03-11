@@ -1,6 +1,12 @@
 import { useState } from "react";
 
-export default function EmployeeDetails({ employee, requestEmployees }) {
+export default function EmployeeDetails({
+  employee,
+  requestEmployees,
+  employees,
+  setEmployees,
+  requestTasks,
+}) {
   const [showForm, setShowForm] = useState(false);
   const [fullName, setFullName] = useState(employee.fullName);
   const [phoneNumber, setPhoneNumber] = useState(employee.phoneNumber);
@@ -29,6 +35,16 @@ export default function EmployeeDetails({ employee, requestEmployees }) {
     }
 
     if (response.ok) {
+      const newEmployees = employees.map((emp) => {
+        if (emp._id === json._id) {
+          return json;
+        }
+
+        return emp;
+      });
+
+      setEmployees(newEmployees);
+      requestTasks();
       setShowForm(!showForm);
     }
   };

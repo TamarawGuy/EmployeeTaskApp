@@ -59,7 +59,8 @@ const updateTask = async (req, res) => {
       description,
       assignee,
       dueDate,
-    }
+    },
+    { new: true }
   );
 
   if (!task) {

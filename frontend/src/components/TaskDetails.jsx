@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function TaskDetails({ task, requestTasks }) {
+export default function TaskDetails({ task, requestTasks, tasks, setTasks }) {
   const [showForm, setShowForm] = useState(false);
   const [employees, setEmployees] = useState([]);
 
@@ -62,6 +62,14 @@ export default function TaskDetails({ task, requestTasks }) {
     }
 
     if (response.ok) {
+      const newTasks = tasks.map((task) => {
+        if (task._id === json._id) {
+          return json;
+        }
+
+        return task;
+      });
+      setTasks(newTasks);
       setShowForm(!showForm);
     }
   };
