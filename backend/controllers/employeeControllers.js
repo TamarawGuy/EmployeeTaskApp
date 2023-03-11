@@ -122,7 +122,14 @@ const mostTasksDone = async (req, res) => {
       },
     },
     {
-      $sort: { "completedTasks.length": -1 },
+      $addFields: {
+        numCompletedTasks: {
+          $size: "$completedTasks",
+        },
+      },
+    },
+    {
+      $sort: { numCompletedTasks: -1 },
     },
     { $limit: 5 },
   ]);
