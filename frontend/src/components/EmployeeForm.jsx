@@ -15,7 +15,7 @@ export default function EmployeeForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const employee = { fullName, phoneNumber, dateOfBirth, monthlySalary };
+    const employee = { fullName, email, phoneNumber, dateOfBirth, monthlySalary };
 
     const response = await fetch("/api/employees", {
       method: "POST",

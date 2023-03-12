@@ -89,7 +89,6 @@ div.error {
 .forms {
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
 .employee-form,

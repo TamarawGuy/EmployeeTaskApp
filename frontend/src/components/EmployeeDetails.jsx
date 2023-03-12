@@ -19,7 +19,7 @@ export default function EmployeeDetails({
   const handleEdit = async (e) => {
     e.preventDefault();
 
-    const newEmployee = { fullName, phoneNumber, dateOfBirth, monthlySalary };
+    const newEmployee = { fullName, email, phoneNumber, dateOfBirth, monthlySalary };
 
     const response = await fetch(`/api/employees/${employee._id}`, {
       method: "PATCH",
