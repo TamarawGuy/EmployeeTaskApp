@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Employee = require("../models/employeeModel");
+const Task = require("../models/taskModel");
 
 const getEmployees = async (req, res) => {
   const employees = await Employee.find({});
@@ -7,11 +8,12 @@ const getEmployees = async (req, res) => {
 };
 
 const createEmployee = async (req, res) => {
-  const { fullName, phoneNumber, dateOfBirth, monthlySalary } = req.body;
+  const { fullName, email, phoneNumber, dateOfBirth, monthlySalary } = req.body;
 
   let emptyFields = [];
 
   if (!fullName) emptyFields.push("Full Name");
+  if (!email) emptyFields.push("Email");
   if (!phoneNumber) emptyFields.push("Phone Number");
   if (!dateOfBirth) emptyFields.push("Date of Birth");
   if (!monthlySalary) emptyFields.push("Monthly Salary");
@@ -26,6 +28,7 @@ const createEmployee = async (req, res) => {
   try {
     const employee = await Employee.create({
       fullName,
+      email,
       phoneNumber,
       dateOfBirth,
       monthlySalary,
@@ -39,7 +42,7 @@ const createEmployee = async (req, res) => {
 
 const updateEmployee = async (req, res) => {
   const { id } = req.params;
-  const { fullName, phoneNumber, dateOfBirth, monthlySalary } = req.body;
+  const { fullName, email, phoneNumber, dateOfBirth, monthlySalary } = req.body;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).json({ error: "No such employee" });
@@ -48,6 +51,7 @@ const updateEmployee = async (req, res) => {
   let emptyFields = [];
 
   if (!fullName) emptyFields.push("Full Name");
+  if (!email) emptyFields.push("Email");
   if (!phoneNumber) emptyFields.push("Phone Number");
   if (!dateOfBirth) emptyFields.push("Date of Birth");
   if (!monthlySalary) emptyFields.push("Monthly Salary");
@@ -63,6 +67,7 @@ const updateEmployee = async (req, res) => {
     { _id: id },
     {
       fullName,
+      email,
       phoneNumber,
       dateOfBirth,
       monthlySalary,
@@ -89,6 +94,8 @@ const deleteEmployee = async (req, res) => {
   if (!employee) {
     return res.status(400).json({ error: "No such employee" });
   }
+
+  const tasks = await Task.deleteMany({ assignee: employee._id });
 
   res.status(200).json(employee);
 };

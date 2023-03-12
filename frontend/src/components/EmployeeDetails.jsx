@@ -9,6 +9,7 @@ export default function EmployeeDetails({
 }) {
   const [showForm, setShowForm] = useState(false);
   const [fullName, setFullName] = useState(employee.fullName);
+  const [email, setEmail] = useState(employee.email);
   const [phoneNumber, setPhoneNumber] = useState(employee.phoneNumber);
   const [dateOfBirth, setDateOfBirth] = useState(employee.dateOfBirth);
   const [monthlySalary, setMonthlySalary] = useState(employee.monthlySalary);
@@ -67,6 +68,7 @@ export default function EmployeeDetails({
 
     if (response.ok) {
       requestEmployees();
+      requestTasks();
     }
   };
 
@@ -75,6 +77,10 @@ export default function EmployeeDetails({
       <p>
         <strong>Name: </strong>
         {employee.fullName}
+      </p>
+      <p>
+        <strong>Email: </strong>
+        {employee.email}
       </p>
       <p>
         <strong>Phone Number: </strong>
@@ -103,6 +109,13 @@ export default function EmployeeDetails({
             type="text"
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
+          />
+
+          <label>Email:</label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
 
           <label>Phone Number:</label>

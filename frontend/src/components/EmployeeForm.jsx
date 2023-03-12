@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function EmployeeForm() {
   const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [monthlySalary, setMonthlySalary] = useState(null);
@@ -51,6 +52,13 @@ export default function EmployeeForm() {
         type="text"
         value={fullName}
         onChange={(e) => setFullName(e.target.value)}
+      />
+
+      <label>Email:</label>
+      <input
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
       />
 
       <label>Phone Number:</label>
